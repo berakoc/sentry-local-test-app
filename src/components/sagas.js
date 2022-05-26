@@ -2,8 +2,19 @@ import * as TodoTypes from './types';
 import * as TodoActions from './actions';
 import { put, call, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
+import * as Sentry from '@sentry/react';
 
-const fetchTodo = (id) => axios(`https://jsonplaceholder.typicode.com/todos/${id}`).then(res => res.data);
+axios.interceptors.response.use(
+    (response) => response,
+    (error) => {
+      Sentry.captureException(error);
+      return Promise.reject(error);
+    },
+  );
+
+const fetchTodo = (id) => axios(`https://jsonplaceholder.typicode.com/todos/${id}`).then(res => res.data).catch(err => {
+    throw err;
+});
 
 
 function *getTodoSaga({ payload: id}) {
