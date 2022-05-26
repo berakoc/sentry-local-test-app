@@ -11,8 +11,9 @@ import store from './store';
 import * as Sentry from "@sentry/react";
 import { BrowserTracing } from '@sentry/tracing';
 
+console.log(process.env.NODE_ENV)
 
-Sentry.init({
+process.env.NODE_ENV === 'production' && Sentry.init({
   dsn: "https://ca67e6aefe154a85bd16a5cb576dbcf4@o1263372.ingest.sentry.io/6442990",
   integrations: [new BrowserTracing()],
 
