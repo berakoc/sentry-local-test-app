@@ -20,12 +20,14 @@ const TodoReducer = (state=initialState, action) => {
                 ...state,
                 isLoading: false,
                 data: payload,
+                error: null,
             };
         case Types.GET_TODO_FAILURE:
             return {
                 ...state,
                 isLoading: false,
                 error: payload,
+                data: null,
             };
         default:
             return state;

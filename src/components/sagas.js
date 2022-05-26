@@ -7,7 +7,8 @@ import * as Sentry from '@sentry/react';
 axios.interceptors.response.use(
     (response) => response,
     (error) => {
-      Sentry.captureException(error);
+        console.log(error instanceof Error);
+      Sentry.captureException({ exception: error });
       return Promise.reject(error);
     },
   );
