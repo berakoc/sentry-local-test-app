@@ -26,11 +26,6 @@ const Todo = () => {
             {isLoading ? 'Loading...' : error ? 'Oops' : 'Ready'}
             {data && <pre>{JSON.stringify(data, null, 2)}</pre>}
             {error && <pre>{JSON.stringify(pick(error, ['name', 'message']), null, 2)}</pre>}
-            <S.StyledButton {...generateSentryDataId('ErrorButton')} onClick={() => {
-                throw new Error('Sentry Error');
-            }}>
-                Throw Error
-            </S.StyledButton>
         </div>
     )
 }
