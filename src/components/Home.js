@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import { generatePath } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
+import tryCatchWithSentry from '../tryCatchWithSentry';
 import * as S from './style';
 
 const Home = () => {
@@ -14,11 +15,9 @@ const Home = () => {
         history.push(url);
     }
     const printData = (data) => {
-        try {
+        return tryCatchWithSentry(() => {
             return data?.print();
-        } catch (err) {
-            console.error(err);
-        }
+        });
     }
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
