@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useParams } from 'react-router-dom'
-import createSentryDataIdGenerator from '../createSentryDataId';
 import * as TodoActions from './actions';
 import * as S from './style';
 
@@ -15,7 +14,6 @@ const Todo = () => {
     useEffect(() => {
         dispatch(TodoActions.getTodoRequest(id));
     }, [dispatch, id]);
-    const generateSentryDataId = createSentryDataIdGenerator('Todo');
     return (
         <div>
             <S.StyledButton onClick={() => {
