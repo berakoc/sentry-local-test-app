@@ -13,12 +13,19 @@ const Home = () => {
         const url = generatePath('/todo/:id', { id: data.todoId });
         history.push(url);
     }
+    const printData = (data) => {
+        try {
+            return data?.print();
+        } catch (err) {
+            console.error(err);
+        }
+    }
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <S.StyledInput {...register('todoId', { required: true })} placeholder='Enter todo id' />
             <S.StyledButton>Open Todo</S.StyledButton>
             <S.ErrorMessage>{errors.todoId && 'Todo id is required'}</S.ErrorMessage>
-            {data?.print()}
+            {printData(data)}
         </form>
     );
 }
