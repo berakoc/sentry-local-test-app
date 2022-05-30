@@ -3,13 +3,14 @@ import { useSelector } from 'react-redux';
 import { generatePath } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import tryCatchWithSentry from '../tryCatchWithSentry';
+import withSentryId from '../withSentryId';
 import * as S from './style';
 
 const throwSomeError = () => {
     throw new Error('Some error');
 };
 
-const Home = () => {
+const Home = ({ generateSentryId }) => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const history = useHistory();
     const { data } = useSelector(state => state.todo);
@@ -31,7 +32,7 @@ const Home = () => {
             <S.ErrorMessage>{errors.todoId && 'Todo id is required'}</S.ErrorMessage>
             {printData(data)}
             </form>
-            <S.StyledButton onClick={() => {
+            <S.StyledButton {...generateSentryId('throwSomeError')} onClick={() => {
                 tryCatchWithSentry(throwSomeError, (err) => {
                     console.warn('Error handled', err.name, err.message);
                 });
@@ -40,4 +41,4 @@ const Home = () => {
     );
 }
 
-export default Home;
+export default withSentryId(Home);
