@@ -32,11 +32,9 @@ const Home = () => {
             {printData(data)}
             </form>
             <S.StyledButton onClick={() => {
-                try {
-                    throwSomeError();
-                } catch (err) {
+                tryCatchWithSentry(throwSomeError, (err) => {
                     console.warn('Error handled', err.name, err.message);
-                }
+                });
             }}>Throw Some Error</S.StyledButton>
         </>
     );
