@@ -20,6 +20,6 @@ const standardCatchFn = (error) => {
 export default function tryCatchWithSentry(tryFn, catchFn = standardCatchFn, options = {
     tryCatchFunction: nativeTryCatch,
 }) {
-    return withSentry(options.nativeTryCatch)(tryFn, catchFn);
+    return withSentry(options.tryCatchFunction)(tryFn, catchFn);
 };
 
