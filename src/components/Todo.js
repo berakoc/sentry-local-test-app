@@ -3,10 +3,11 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useParams } from 'react-router-dom'
+import withSentryId from '../withSentryId';
 import * as TodoActions from './actions';
 import * as S from './style';
 
-const Todo = () => {
+const Todo = ({ generateSentryId }) => {
     const { id } = useParams();
     const dispatch = useDispatch();
     const { data, isLoading, error } = useSelector(state => state.todo);
@@ -22,7 +23,7 @@ const Todo = () => {
     }, [id, history, dispatch])
     return (
         <div>
-            <S.StyledButton onClick={() => {
+            <S.StyledButton {...generateSentryId('goHome')} onClick={() => {
                 history.push('/');
             }}>
                 Go back
@@ -34,4 +35,4 @@ const Todo = () => {
     )
 }
 
-export default Todo;
+export default withSentryId(Todo);

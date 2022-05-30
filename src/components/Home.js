@@ -5,6 +5,10 @@ import { useHistory } from 'react-router-dom';
 import tryCatchWithSentry from '../tryCatchWithSentry';
 import * as S from './style';
 
+const throwSomeError = () => {
+    throw new Error('Some error');
+};
+
 const Home = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const history = useHistory();
@@ -20,12 +24,21 @@ const Home = () => {
         });
     }
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <>
+            <form onSubmit={handleSubmit(onSubmit)}>
             <S.StyledInput {...register('todoId', { required: true })} placeholder='Enter todo id' />
             <S.StyledButton>Open Todo</S.StyledButton>
             <S.ErrorMessage>{errors.todoId && 'Todo id is required'}</S.ErrorMessage>
             {printData(data)}
-        </form>
+            </form>
+            <S.StyledButton onClick={() => {
+                try {
+                    throwSomeError();
+                } catch (err) {
+                    console.warn('Error handled', err.name, err.message);
+                }
+            }}>Throw Some Error</S.StyledButton>
+        </>
     );
 }
 
