@@ -1,7 +1,7 @@
-import { Route } from 'react-router-dom';
-import { Switch } from 'react-router-dom';
-import Home from './components/Home';
-import Todo from './components/Todo';
+import { Route } from "react-router-dom";
+import { Switch } from "react-router-dom";
+import Home from "./components/Home";
+import Todo from "./components/Todo";
 
 function App() {
   return (
