@@ -21,6 +21,6 @@ const sentryErrorHandler = (error, componentStack) => {
     });
 }
 
-const SentryErrorFallback = () => "Some error happened";
+const SentryErrorFallbackComponent = () => "Some error happened";
 
-export const SentryErrorBoundary = ({ children }) => <ErrorBoundary FallbackComponent={SentryErrorFallback} onError={sentryErrorHandler}>{children}</ErrorBoundary>
+export const SentryErrorBoundary = ({ children }) => <ErrorBoundary FallbackComponent={SentryErrorFallbackComponent} onError={sentryErrorHandler}>{children}</ErrorBoundary>

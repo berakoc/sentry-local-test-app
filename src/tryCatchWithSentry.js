@@ -1,4 +1,5 @@
 import * as Sentry from "@sentry/react";
+import { identity } from 'lodash';
 
 function nativeTryCatch(tryFn, catchFn) {
   try {
@@ -17,9 +18,7 @@ const withSentry = (tryCatchFn) => (tryFn, catchFn) =>
     }
   );
 
-const standardCatchFn = (error) => {
-  console.error(error);
-};
+const standardCatchFn = identity;
 
 export default function tryCatchWithSentry(
   tryFn,
