@@ -45,13 +45,12 @@ const Home = ({ generateSentryId }) => {
       <S.StyledButton
         {...generateSentryId("throwSomeError")}
         onClick={() => {
-          tryCatchWithSentry(throwSomeError, (err) => {
-            console.warn("Error handled", err.name, err.message);
-          });
+            throwSomeError();
         }}
       >
         Throw Some Error
       </S.StyledButton>
+      {[1,2,3].map((i) => <div>{i}</div>)}
     </>
   );
 };
