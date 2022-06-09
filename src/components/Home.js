@@ -45,7 +45,7 @@ const Home = ({ generateSentryId }) => {
       <S.StyledButton
         {...generateSentryId("throwSomeError")}
         onClick={() => {
-            throwSomeError();
+            tryCatchWithSentry(throwSomeError);
         }}
       >
         Throw Some Error
