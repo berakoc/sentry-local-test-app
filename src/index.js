@@ -25,15 +25,15 @@ process.env.NODE_ENV === "production" &&
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <Sentry.ErrorBoundary fallback={"Oops site crashed"}>
     <BrowserRouter>
       <ThemeProvider theme={theme}>
         <Provider store={store}>
+        <Sentry.ErrorBoundary fallback={"Oops site crashed"}>
           <App />
+        </Sentry.ErrorBoundary>
         </Provider>
       </ThemeProvider>
     </BrowserRouter>
-  </Sentry.ErrorBoundary>
 );
 
 // If you want to start measuring performance in your app, pass a function
