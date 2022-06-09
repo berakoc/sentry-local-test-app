@@ -8,29 +8,19 @@ import theme from "./theme";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store";
-import * as Sentry from "@sentry/react";
-import { BrowserTracing } from "@sentry/tracing";
+import { initSentry, SentryErrorBoundary } from './sentry';
 
-process.env.NODE_ENV === "production" &&
-  Sentry.init({
-    dsn: "https://ca67e6aefe154a85bd16a5cb576dbcf4@o1263372.ingest.sentry.io/6442990",
-    integrations: [new BrowserTracing()],
-    normalizeDepth: 10,
+initSentry();
 
-    // Set tracesSampleRate to 1.0 to capture 100%
-    // of transactions for performance monitoring.
-    // We recommend adjusting this value in production
-    tracesSampleRate: 1.0,
-  });
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
     <BrowserRouter>
       <ThemeProvider theme={theme}>
         <Provider store={store}>
-        <Sentry.ErrorBoundary fallback={"Oops site crashed"}>
+        <SentryErrorBoundary>
           <App />
-        </Sentry.ErrorBoundary>
+        </SentryErrorBoundary>
         </Provider>
       </ThemeProvider>
     </BrowserRouter>
